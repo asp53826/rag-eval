@@ -1,0 +1,19 @@
+[project]
+name = "rag-eval"
+version = "0.1.0"
+description = "A RAG pipeline with a reproducible evaluation harness and regression gates"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26"]
+
+[project.optional-dependencies]
+full = ["torch>=2.2", "sentence-transformers>=3.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["ragkit*", "eval*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

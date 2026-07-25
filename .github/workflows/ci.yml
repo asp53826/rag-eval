@@ -1,0 +1,36 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -r requirements-dev.txt
+      - run: pytest -q
+
+  # the point of the whole repo: retrieval quality is gated like any other test.
+  # a change that costs a point of nDCG fails the build instead of shipping.
+  eval-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+      - name: cache benchmark data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: beir-scifact-squad-v2
+      - run: python scripts/fetch_data.py
+      - name: BM25 must not regress against the frozen baseline
+        run: python -m eval.cli check --dataset scifact --retriever bm25 --offline
