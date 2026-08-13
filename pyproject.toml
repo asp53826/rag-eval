@@ -3,7 +3,7 @@ name = "rag-eval"
 version = "0.1.0"
 description = "A RAG pipeline with a reproducible evaluation harness and regression gates"
 requires-python = ">=3.11"
-dependencies = ["numpy>=1.26"]
+dependencies = ["numpy>=2.4.6"]
 
 [project.optional-dependencies]
 full = ["torch>=2.2", "sentence-transformers>=3.0"]
