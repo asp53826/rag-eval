@@ -6,7 +6,7 @@ requires-python = ">=3.11"
 dependencies = ["numpy>=1.26"]
 
 [project.optional-dependencies]
-full = ["torch>=2.2", "sentence-transformers>=3.0"]
+full = ["torch>=2.2", "sentence-transformers>=5.7.0"]
 
 [build-system]
 requires = ["setuptools>=68"]
