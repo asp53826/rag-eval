@@ -9,7 +9,7 @@ dependencies = ["numpy>=1.26"]
 full = ["torch>=2.2", "sentence-transformers>=3.0"]
 
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=84.2.1"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
